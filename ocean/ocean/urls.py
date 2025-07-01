@@ -1,5 +1,5 @@
 """
-URL configuration for ocean project.
+URL configuration for ocean project. hello
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
