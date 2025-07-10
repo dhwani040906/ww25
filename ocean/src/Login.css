@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.login-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    
+}
+
+.login-box{
+    padding: 30px 40px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.login-box label{
+    display: block;
+    margin: 10px 0;
+}
+
+.button-box{
+    display: flex;
+    justify-content: center;
+
+}
+
+.login-box button{
+    border: 2px solid;
+    border-radius: 10px;
+    
+}
+
+.login-box button:hover{
+    background-color: #ddd;
+}

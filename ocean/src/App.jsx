@@ -1,8 +1,9 @@
 import Gallery from './Gallery';
+import Login from './Login';
 function App(){
     return(
         <div>
-            <Gallery/>
+            <Login/>
         </div>
     )
 }
