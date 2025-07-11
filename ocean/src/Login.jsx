@@ -7,7 +7,7 @@ function Login(){
             <br/>
             <label>Username: <input type="text" id="username" name="username" /></label>
             <br/>
-            <label>Password: <input type="text" id="password" name="password"/></label>
+            <label>Password: <input type="password" id="password" name="password"/></label>
             <br/>
             <div className="button-box">
             <button type="submit">Login</button>

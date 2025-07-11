@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.register-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+
+.register-box{
+    padding: 30px 40px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.register-box label{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+ 
+.register-box span{
+    width: 100px;
+    display: inline-block;
+}
+
+.register-box input{
+    flex: 1;
+    padding: 5px;
+}
+
+.sign-box{
+    display: flex;
+    justify-content: center;
+}
+
+.submit{
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.sign-box button:hover{
+    background-color: #ddd;
+}
+
+.switch{
+    padding: 3px 3px;
+}
