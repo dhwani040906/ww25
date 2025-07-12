@@ -3,6 +3,7 @@ import './Register.css'
 function Register(){
     return(
         <div className="register-container">
+        {/* register box   */}
         <div className="register-box">
             <h2>SIGN UP</h2>
             <br/>

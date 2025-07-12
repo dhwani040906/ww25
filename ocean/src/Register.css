@@ -1,4 +1,4 @@
-body{
+/* body{
     margin: 0;
     padding: 0;
     height: 100%;
@@ -49,4 +49,212 @@ body{
 
 .switch{
     padding: 3px 3px;
+} */
+ /* Reset base */
+/* Reset base */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    background-attachment: fixed;
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animated bubble background */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://www.transparenttextures.com/patterns/bubbles.png') repeat;
+    opacity: 0.2;
+    z-index: -1;
+    animation: moveBubbles 60s linear infinite;
+}
+
+@keyframes moveBubbles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
+}
+
+.register-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+    padding: 30px 40px;
+    width: 350px;
+    z-index: 1;
+    transition: 0.3s ease;
+}
+
+.register-container:hover {
+    box-shadow: 0 0 35px rgba(0, 255, 255, 0.5);
+}
+
+.register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #aefeff;
+    text-shadow: 1px 1px 5px #004b6b;
+}
+
+.register-box label {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.register-box span {
+    width: 100px;
+    display: inline-block;
+    color: #ccf2ff;
+}
+
+.register-box input {
+    flex: 1;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    outline: none;
+    box-shadow: inset 0 0 5px #00e5ff;
+    transition: background-color 0.3s ease;
+}
+
+.register-box input:focus {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.sign-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.submit {
+    padding: 10px 25px;
+    background-color: #007a99;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00bcd4;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit:hover {
+    background-color: #00bcd4;
+    box-shadow: 0 0 15px #00e5ff;
+    transform: scale(1.05);
+}
+
+.switch {
+    margin-top: 15px;
+    background: none;
+    border: 1px solid #66ffff;
+    border-radius: 6px;
+    color: #aefeff;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.switch:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+p {
+    text-align: center;
+    margin-top: 15px;
+    color: #cceeff;
+    font-size: 14px;
+}
+/* BUBBLES CONTAINER */
+.bubble-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* INDIVIDUAL BUBBLE STYLE */
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: rise 10s infinite ease-in;
+}
+
+/* RANDOMIZED BUBBLE POSITIONS & SIZES */
+.bubble:nth-child(1) {
+  left: 10%;
+  width: 15px;
+  height: 15px;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+.bubble:nth-child(2) {
+  left: 30%;
+  width: 25px;
+  height: 25px;
+  animation-duration: 12s;
+  animation-delay: 2s;
+}
+.bubble:nth-child(3) {
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  animation-duration: 10s;
+  animation-delay: 4s;
+}
+.bubble:nth-child(4) {
+  left: 70%;
+  width: 18px;
+  height: 18px;
+  animation-duration: 14s;
+  animation-delay: 1s;
+}
+.bubble:nth-child(5) {
+  left: 90%;
+  width: 22px;
+  height: 22px;
+  animation-duration: 9s;
+  animation-delay: 3s;
+}
+
+/* FLOATING BUBBLE ANIMATION */
+@keyframes rise {
+  0% {
+    bottom: -50px;
+    transform: translateX(0) scale(1);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 110%;
+    transform: translateX(-20px) scale(1.2);
+    opacity: 0;
+  }
 }
