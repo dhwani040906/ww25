@@ -50,8 +50,7 @@
 .switch{
     padding: 3px 3px;
 } */
- /* Reset base */
-/* Reset base */
+
 body {
     margin: 0;
     padding: 0;
@@ -61,26 +60,6 @@ body {
     background-attachment: fixed;
     color: white;
     overflow: hidden;
-    position: relative;
-}
-
-/* Animated bubble background */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: url('https://www.transparenttextures.com/patterns/bubbles.png') repeat;
-    opacity: 0.2;
-    z-index: -1;
-    animation: moveBubbles 60s linear infinite;
-}
-
-@keyframes moveBubbles {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-100%); }
 }
 
 .register-container {

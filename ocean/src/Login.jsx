@@ -1,5 +1,5 @@
 import './Login.css'
-function Login(){
+function Login({switchToRegister}){
     return(
         <div className="login-container">
         <div className="login-box">
@@ -12,7 +12,7 @@ function Login(){
             <div className="button-box">
             <button type="submit">Login</button>
             </div>
-            <p>Didn't sign up? <button className="switch" type="button">Register</button></p>
+            <p>Didn't sign up? <button onClick={switchToRegister} className="switch" type="button">Register</button></p>
         </div>
         </div>
     )

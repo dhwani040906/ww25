@@ -1,6 +1,6 @@
 import './Register.css'
 
-function Register(){
+function Register({switchToLogin}){
     return(
         <div className="register-container">
         {/* register box   */}
@@ -30,7 +30,7 @@ function Register(){
             <div className="sign-box">
             <button className="submit" type="submit">Sign Up</button>
             </div>
-            <p>Already have an account? <button className="switch" type="button">Login</button></p>
+            <p>Already have an account? <button onClick={switchToLogin} className="switch" type="button">Login</button></p>
         </div>
         </div>
     )
