@@ -4,8 +4,8 @@ import Register from './Register';
 function App(){
     return(
         <div>
-            <Login/>
-            {/* <Register/> */}
+            {/* <Login/> */}
+            <Register/>
         </div>
     )
 }
