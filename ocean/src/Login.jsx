@@ -12,6 +12,7 @@ function Login(){
             <div className="button-box">
             <button type="submit">Login</button>
             </div>
+            <p>Didn't sign up? <button className="switch" type="button">Register</button></p>
         </div>
         </div>
     )
