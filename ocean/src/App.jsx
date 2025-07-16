@@ -2,6 +2,7 @@ import Gallery from './Gallery';
 import Login from './Login'
 import Register from './Register';
 import Home from './Home';
+import Explore from './Explore'
 import React, {useState} from 'react';
 
 function App(){
@@ -13,6 +14,7 @@ function App(){
            {showLogin ? (<Login switchToRegister={() => setShowLogin(false)} />) : (
             <Register switchToLogin={() => setShowLogin(true)} />)}
             {/* <Home/> */}
+            {/* <Explore/> */}
         </div>
     )
 }
