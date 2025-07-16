@@ -11,9 +11,9 @@ function App(){
 
     return(
         <div>
-           {showLogin ? (<Login switchToRegister={() => setShowLogin(false)} />) : (
-            <Register switchToLogin={() => setShowLogin(true)} />)}
-            {/* <Home/> */}
+           {/* {showLogin ? (<Login switchToRegister={() => setShowLogin(false)} />) : (
+            <Register switchToLogin={() => setShowLogin(true)} />)} */}
+            <Home/>
             {/* <Explore/> */}
         </div>
     )
