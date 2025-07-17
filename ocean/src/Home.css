@@ -33,14 +33,14 @@
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    background: #00bfff;
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     font-weight: bold;
     transition: background 0.3s ease;
 }
 
 .auth-buttons button:hover {
-    background: #008ac7;
+    background: rgba(40,38,38,0.8);
 }
 
 /* Main content: two-column layout */
