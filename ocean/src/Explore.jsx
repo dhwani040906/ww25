@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Explore.css';
 
 const cards = [
@@ -25,6 +26,7 @@ const cards = [
 ];
 
 export default function Explore() {
+  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const rotateLeft = () => {
@@ -48,7 +50,7 @@ export default function Explore() {
 
   return (
     <div className="explore-page">
-      <button className="explore-home-button">Home</button>
+      <button className="explore-home-button" onClick={() => navigate('/')}>Home</button>
 
       {/* Title, Info & Go Button */}
       <div className="explore-top-info">

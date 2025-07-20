@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Logo from './Logo'
 import diveimg from './assets/home_dive.jpg';
@@ -44,12 +45,13 @@ const cards = [
 function Home() {
     const [hoverIndex, setHoverIndex] = useState(0);
     const activeCard = cards[hoverIndex];
+    const navigate = useNavigate();
 
     return (
         <div className="home-container">
             {/* Top Taskbar */}
             <div className="home-taskbar">
-                <button className="home-login">Login</button>
+                <button className="home-login" onClick={()=>navigate('/login')}>Login</button>
 
                 {/* Centered Logo */}
                 <Logo className="home-logo-dv"/>
@@ -74,6 +76,7 @@ function Home() {
                                     key={index}
                                     className={`home-card ${index === hoverIndex ? 'active' : ''}`}
                                     onMouseEnter={() => setHoverIndex(index)}
+                                    onClick={() => navigate(`/${card.title.toLowerCase()}`)}
                                 >
                                     <img src={card.image} alt={card.title} />
                                     <div className="home-card-title">{card.title}</div>

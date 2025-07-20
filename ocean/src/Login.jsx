@@ -1,5 +1,8 @@
+// import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import './Login.css'
 function Login({switchToRegister}){
+    const navigate = useNavigate();
     return(
         <div className="login-container">
         <div className="login-box">
@@ -12,7 +15,7 @@ function Login({switchToRegister}){
             <div className="button-box">
             <button type="submit">Login</button>
             </div>
-            <p>Didn't sign up? <button onClick={switchToRegister} className="switch" type="button">Register</button></p>
+            <p>Didn't sign up? <button onClick={()=>navigate('/register')} className="switch" type="button">Register</button></p>
         </div>
         </div>
     )
