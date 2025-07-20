@@ -1,4 +1,6 @@
+import React, { useState } from 'react';
 import './Home.css';
+import Logo from './Logo'
 import diveimg from './assets/home_dive.jpg';
 import galleryimg from './assets/home_gallery.jpg';
 import threatsimg from './assets/home_threats.jpg';
@@ -6,45 +8,77 @@ import solutionsimg from './assets/home_solutions.jpg';
 import aboutimg from './assets/home_about.jpg';
 import communityimg from './assets/home_community.jpg';
 
+const cards = [
+    {
+        title: "Dive In",
+        image: diveimg,
+        description: "Dive into the depths of the oceans to uncover their mysteries and magic."
+    },
+    {
+        title: "Explore",
+        image: galleryimg,
+        description: "Discover a stunning gallery of marine life, plants, and underwater beauty."
+    },
+    {
+        title: "Threats",
+        image: threatsimg,
+        description: "Learn about the serious threats oceans face like pollution and climate change."
+    },
+    {
+        title: "Solutions",
+        image: solutionsimg,
+        description: "Explore the steps taken globally to protect and preserve oceanic ecosystems."
+    },
+    {
+        title: "Community",
+        image: communityimg,
+        description: "Join hands with a growing community of ocean lovers and activists."
+    },
+    {
+        title: "About Us",
+        image: aboutimg,
+        description: "Know more about our mission, values, and the team behind this platform."
+    }
+];
+
 function Home() {
+    const [hoverIndex, setHoverIndex] = useState(0);
+    const activeCard = cards[hoverIndex];
+
     return (
-        <div className="whole-home">
-            {/* Top Navigation Bar */}
-            <div className="task-bar">
-                <div className="logo">
-                    <h3>DEEP VERSE</h3>
-                </div>
-                <div className="auth-buttons">
-                    <button className="login">Login</button>
-                    <button className="logout">Logout</button>
-                </div>
+        <div className="home-container">
+            {/* Top Taskbar */}
+            <div className="home-taskbar">
+                <button className="home-login">Login</button>
+
+                {/* Centered Logo */}
+                <Logo className="home-logo-dv"/>
+
+                <button className="home-logout">Logout</button>
             </div>
 
             {/* Main Section: Left and Right */}
-            <div className="main-section">
-                {/* Left: Text */}
-                <div className="hero-content">
-                    <h1 id="heading">LET'S DIVE INTO THE WORLD OF OCEANS</h1>
-                    <p id="lines">
-                        Dive in to explore the magical layers of the ocean,
-                        discover fascinating marine animals and plants in our Gallery,
-                        uncover the threats facing our seas, and learn about real-world Solutions
-                        being taken to protect them. Sail through history with legendary Ships,
-                        and join a growing Community passionate about preserving the deep blue.
-                        Every scroll takes you deeper — every click brings you closer to the ocean’s heartbeat!
-                    </p>
+            <div className="home-main-section">
+                {/* Left: Dynamic Text */}
+                <div className="home-hero-content">
+                    <h1 className="home-heading">{activeCard.title}</h1>
+                    <p className="home-lines">{activeCard.description}</p>
                 </div>
 
                 {/* Right: Scrollable Buttons */}
-                <div className="scroll-wrapper">
-                    <div className="scroll-bar">
-                        <div className="card-container">
-                            <button className="card"><img src={diveimg} /><div className="card-title">Dive In</div></button>
-                            <button className="card"><img src={galleryimg} /><div className="card-title">Explore</div></button>
-                            <button className="card"><img src={threatsimg} /><div className="card-title">Threats</div></button>
-                            <button className="card"><img src={solutionsimg} /><div className="card-title">Solutions</div></button>
-                            <button className="card"><img src={communityimg} /><div className="card-title">Community</div></button>
-                            <button className="card"><img src={aboutimg} /><div className="card-title">About-Us</div></button>
+                <div className="home-scroll-wrapper">
+                    <div className="home-scroll-bar">
+                        <div className="home-card-container">
+                            {cards.map((card, index) => (
+                                <button
+                                    key={index}
+                                    className={`home-card ${index === hoverIndex ? 'active' : ''}`}
+                                    onMouseEnter={() => setHoverIndex(index)}
+                                >
+                                    <img src={card.image} alt={card.title} />
+                                    <div className="home-card-title">{card.title}</div>
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>

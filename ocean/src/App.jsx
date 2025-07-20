@@ -15,6 +15,7 @@ function App(){
             <Register switchToLogin={() => setShowLogin(true)} />)} */}
             <Home/>
             {/* <Explore/> */}
+            {/* <Fishes/> */}
         </div>
     )
 }
