@@ -1,0 +1,26 @@
+@keyframes pulseGlow {
+    0% {
+        filter: drop-shadow(0 0 5px #00eaff) drop-shadow(0 0 10px #00eaff);
+    }
+    50% {
+        filter: drop-shadow(0 0 12px #00eaff) drop-shadow(0 0 25px #00eaff);
+    }
+    100% {
+        filter: drop-shadow(0 0 5px #00eaff) drop-shadow(0 0 10px #00eaff);
+    }
+}
+
+.deepverse-logo-wrapper {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: relative;
+    margin-top: -20px;
+    right: -900px;
+}
+
+.deepverse-logo {
+    width: 160px;
+    height: auto;
+    animation: pulseGlow 3s ease-in-out infinite;
+}

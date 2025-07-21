@@ -1,6 +1,6 @@
-import './Ships.css'
+import './Plants.css'
 
-function Ships(){
+function Plants(){
     return(
         <div>
             <h1>plants</h1>
@@ -8,4 +8,4 @@ function Ships(){
     )
 }
 
-export default Ships;
+export default Plants;

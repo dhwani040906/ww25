@@ -1,6 +1,6 @@
-import './Ships.css'
+import './Shells.css'
 
-function Ships(){
+function Shells(){
     return(
         <div>
             <h1>plants</h1>
@@ -8,4 +8,4 @@ function Ships(){
     )
 }
 
-export default Ships;
+export default Shells;

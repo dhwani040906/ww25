@@ -1,0 +1,155 @@
+.explore-page {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom, #001F3F, #000814);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Home button */
+.explore-home-button {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid #00bfff;
+  color: #00bfff;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Top heading, description & go button */
+.explore-top-info {
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: -300px;
+}
+
+.explore-top-info h1 {
+  font-size: 6rem;
+  color: #00bfff;
+  margin-bottom: 10px;
+}
+
+.explore-top-description {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  color: #ccc;
+}
+
+.explore-go-btn {
+  padding: 15px 27px;
+  background-color: #00bfff;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  color: #001F3F;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  top: 150px;
+  z-index: 10;
+}
+
+.explore-go-btn:hover {
+  background-color: #0099cc;
+}
+
+/* Carousel Layout */
+.explore-carousel {
+  position: relative;
+  width: 800px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Style */
+.explore-card {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #003366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transition: all 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+}
+
+.explore-card h3 {
+  font-size: 1.2rem;
+}
+
+/* Focused Card */
+.explore-card.center {
+  transform: translateX(0) translateY(250px) scale(1.8);
+  z-index: 3;
+  opacity: 1;
+  pointer-events: auto;
+  background-color: #0077cc;
+}
+
+/* Side Cards */
+.explore-card.left {
+  transform: translateX(-600px) scale(1.5);
+  z-index: 2;
+  opacity: 0.8;
+  pointer-events: auto;
+}
+
+.explore-card.right {
+  transform: translateX(600px) scale(1.5);
+  z-index: 2;
+  opacity: 0.8;
+  pointer-events: auto;
+}
+
+.explore-card.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Arrows */
+.explore-arrow {
+  font-size: 2.5rem;
+  background: none;
+  border: none;
+  color: #00bfff;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.explore-arrow:hover {
+  transform: scale(1.2);
+}
+
+.explore-arrow:focus {
+  outline: none;
+}
+
+.explore-left {
+  position: absolute;
+  left: -200px;
+  top: 150%;
+}
+
+.explore-right {
+  position: absolute;
+  right: -200px;
+  top: 150%;
+}
