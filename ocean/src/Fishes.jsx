@@ -70,7 +70,7 @@ const Fishes = () => {
     };
 
     const handleMouseMove = (e) => {
-      const taskbar = document.querySelector('.taskbar');
+      const taskbar = document.querySelector('.Fishestaskbar');
       if (taskbar) {
         const rect = taskbar.getBoundingClientRect();
         if (e.clientX > rect.right) {
@@ -128,7 +128,6 @@ const Fishes = () => {
               updatedDx = -Math.abs(currentDx);
             }
 
-            // Regular wall bounce (Y-axis)
             if (nextY < 0) {
               nextY = 0;
               updatedDy = Math.abs(currentDy);
@@ -141,7 +140,6 @@ const Fishes = () => {
           a.dx = updatedDx;
           a.dy = updatedDy;
 
-          // Emit bubbles
           if (Math.random() < 0.05) {
             animalEffects.current.push({
               type: 'bubble',
@@ -152,7 +150,7 @@ const Fishes = () => {
             });
           }
 
-      
+
           return {
             ...a,
             dx: updatedDx,
@@ -169,7 +167,7 @@ const Fishes = () => {
 
   const releaseAnimal = (animal, imgElement) => {
     const imgRect = imgElement.getBoundingClientRect();
-    const startX = imgRect.left+150;
+    const startX = imgRect.left + 150;
     const startY = imgRect.top;
 
     const initialDx = Math.random() * 15 + 5;
@@ -205,32 +203,34 @@ const Fishes = () => {
   };
 
   return (
-    <div className="ocean">
-      <canvas ref={canvasRef} className="rippleCanvas" />
+    <div className="Fishesocean">
+      <canvas ref={canvasRef} className="FishesrippleCanvas" />
 
-      <div className="taskbar">
-        <h2>Aquatic Animals</h2>
-        {animals.map((animal) => (
-          <div
-            key={animal.id}
-            className={`animalCard ${reloadingAnimalId === animal.id ? 'reloading' : ''}`}
-            onClick={(e) => handleAnimalCardClick(e, animal)}
-          >
-            <img src={animal.img} alt={animal.name} />
-            <p>{animal.name}</p>
-            {selected === animal.id && (
-              <div className="buttons">
-                <button onClick={() => setInfoMessage(`${animal.name} info coming soon!`)}>Information</button>
-                <button onClick={(e) => { e.stopPropagation(); releaseAnimal(animal, e.currentTarget.closest('.animalCard').querySelector('img')); }}>Release into Sea</button>
-              </div>
-            )}
-          </div>
-        ))}
+      <div className="Fishestaskbar">
+        <div className="Fishestaskbar-content"> {/* Added new div for scrolling */}
+          <h2>Aquatic Animals</h2>
+          {animals.map((animal) => (
+            <div
+              key={animal.id}
+              className={`FishesanimalCard ${reloadingAnimalId === animal.id ? 'Fishesreloading' : ''}`}
+              onClick={(e) => handleAnimalCardClick(e, animal)}
+            >
+              <img src={animal.img} alt={animal.name} />
+              <p>{animal.name}</p>
+              {selected === animal.id && (
+                <div className="Fishesbuttons">
+                  <button onClick={() => setInfoMessage(`${animal.name} info coming soon!`)}>Information</button>
+                  <button onClick={(e) => { e.stopPropagation(); releaseAnimal(animal, e.currentTarget.closest('.FishesanimalCard').querySelector('img')); }}>Release into Sea</button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="bubbles">
+      <div className="Fishesbubbles">
         {[...Array(25)].map((_, i) => (
-          <div key={i} className="bubble" style={{
+          <div key={i} className="Fishesbubble" style={{
             left: `${Math.random() * 100}%`,
             animationDuration: `${3 + Math.random() * 5}s`,
             animationDelay: `${Math.random() * 5}s`
@@ -243,14 +243,14 @@ const Fishes = () => {
           key={i}
           src={a.img}
           alt={a.name}
-          className="swimAnimal"
+          className="FishesswimAnimal"
           style={{ left: a.x, top: a.y }}
         />
       ))}
 
       {infoMessage && (
-        <div className="info-modal">
-          <div className="info-modal-content">
+        <div className="Fishesinfo-modal">
+          <div className="Fishesinfo-modal-content">
             <p>{infoMessage}</p>
             <button onClick={() => setInfoMessage(null)}>Close</button>
           </div>
