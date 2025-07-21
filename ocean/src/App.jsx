@@ -14,7 +14,7 @@ import Game from './Game'
 import Quiz from './Quiz'
 import Ships from './Ships'
 // import Solutions from './Solutions'
-// import Threats from './Threats'
+import Threats from './Threats'
 import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
