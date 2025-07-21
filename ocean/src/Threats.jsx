@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-// import './Threats.css';
+import './Threats.css';
 
 const AquaticThreatsWebsite = () => {
   const [currentAnimal, setCurrentAnimal] = useState(0);
