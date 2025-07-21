@@ -56,7 +56,10 @@ export default function Explore() {
       <div className="explore-top-info">
         <h1>{cards[activeIndex].title}</h1>
         <p className="explore-top-description">{cards[activeIndex].description}</p>
-        <button className="explore-go-btn">Go to {cards[activeIndex].title}</button>
+        <button onClick={() => navigate(`/${cards[activeIndex].title.toLowerCase()}`)}
+          className="explore-go-btn">
+          Go to {cards[activeIndex].title}
+        </button>
       </div>
 
       {/* Card Carousel */}

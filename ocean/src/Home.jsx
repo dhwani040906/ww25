@@ -36,7 +36,7 @@ const cards = [
         description: "Join hands with a growing community of ocean lovers and activists."
     },
     {
-        title: "About Us",
+        title: "About",
         image: aboutimg,
         description: "Know more about our mission, values, and the team behind this platform."
     }
@@ -53,21 +53,20 @@ function Home() {
             <div className="home-taskbar">
                 <button className="home-login" onClick={()=>navigate('/login')}>Login</button>
 
-                {/* Centered Logo */}
                 <Logo className="home-logo-dv"/>
 
                 <button className="home-logout">Logout</button>
             </div>
 
-            {/* Main Section: Left and Right */}
+            {/* home */}
             <div className="home-main-section">
-                {/* Left: Dynamic Text */}
+                {/* info */}
                 <div className="home-hero-content">
                     <h1 className="home-heading">{activeCard.title}</h1>
                     <p className="home-lines">{activeCard.description}</p>
                 </div>
 
-                {/* Right: Scrollable Buttons */}
+                {/* Scroll */}
                 <div className="home-scroll-wrapper">
                     <div className="home-scroll-bar">
                         <div className="home-card-container">

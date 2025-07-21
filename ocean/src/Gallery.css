@@ -1,9 +1,66 @@
-.header{
-    font-size: large;
-    color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
+.gallery-page {
+  padding: 60px 30px;
+  text-align: center;
+  background: linear-gradient(to bottom, #001f3f, #003f5c);
+  min-height: 100vh;
+  color: white;
+  width: 100vw;
+  max-width: 100vw;
+  
+  font-family: 'Poppins', sans-serif;
+}
+
+.gallery-heading {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00eaff;
+  border-bottom: 2px solid #00eaff;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.gallery-info {
+  font-size: 18px;
+  color: #e0e0e0;
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.gallery-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.gallery-card {
+  background-color: #00000080;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 260px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 234, 255, 0.5);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.gallery-card h3 {
+  font-size: 22px;
+  margin: 15px 0;
+  color: #ffffff;
+  text-shadow: 0 0 10px #00eaff;
 }

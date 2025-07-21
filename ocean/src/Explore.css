@@ -56,6 +56,7 @@
   transition: 0.3s ease;
   position: relative;
   top: 150px;
+  z-index: 10;
 }
 
 .explore-go-btn:hover {

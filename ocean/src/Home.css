@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  /* background: rgba(0, 0, 0, 0.4); */
   position: relative;
 }
 
@@ -29,10 +29,6 @@
   top: 10px;
 }
 
-.home-logo-dv{
-    position: relative;
-    right: 200px;
-}
 /* Auth Buttons */
 .home-login,
 .home-logout {
@@ -53,6 +49,7 @@
 .home-login {
     position: relative;
     left: 1400px;
+    z-index: 10;
 }
 
 .home-login:hover,
@@ -124,14 +121,16 @@
     color: #00bfff;
     font-family: 'Orbitron', sans-serif;
     position: relative;
-    top: 100px;
+    top: 60px;
+    right: -200px;
 }
 
 .home-lines {
     font-size: 1.1rem;
     line-height: 1.6;
     position: relative;
-    top:100px;
+    top:60px;
+    right: -200px;
 }
 
 /* Scroll wrapper section on the right */
