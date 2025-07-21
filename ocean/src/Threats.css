@@ -1,0 +1,601 @@
+
+    
+      .website-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .ocean-waves {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100px;
+      }
+
+      .wave {
+        position: absolute;
+        bottom: 0;
+        width: 200%;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: wave-animation 3s ease-in-out infinite;
+      }
+
+      .wave1 {
+        animation-delay: 0s;
+        opacity: 0.4;
+      }
+
+      .wave2 {
+        animation-delay: -1s;
+        opacity: 0.3;
+        height: 80px;
+      }
+
+      .wave3 {
+        animation-delay: -2s;
+        opacity: 0.2;
+        height: 60px;
+      }
+
+      @keyframes wave-animation {
+        0%, 100% { transform: translateX(-50%) rotate(0deg); }
+        50% { transform: translateX(-50%) rotate(180deg); }
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 10;
+        position: relative;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: float-in 2s ease-out;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        animation: float-in 2s ease-out 0.5s both;
+      }
+
+      @keyframes float-in {
+        0% {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .floating-bubbles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .bubble {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        animation: bubble-float 6s infinite;
+      }
+
+      .bubble1 {
+        width: 60px;
+        height: 60px;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .bubble2 {
+        width: 40px;
+        height: 40px;
+        left: 85%;
+        animation-delay: -2s;
+      }
+
+      .bubble3 {
+        width: 80px;
+        height: 80px;
+        left: 70%;
+        animation-delay: -4s;
+      }
+
+      .bubble4 {
+        width: 30px;
+        height: 30px;
+        left: 30%;
+        animation-delay: -1s;
+      }
+
+      @keyframes bubble-float {
+        0%, 100% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) scale(0);
+          opacity: 0;
+        }
+      }
+
+      /* Carousel Section */
+      .carousel-section {
+        padding: 4rem 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
+
+      .carousel-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .animal-showcase {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        padding: 3rem;
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.5s ease;
+        margin-bottom: 2rem;
+      }
+
+      .animal-display {
+        text-align: center;
+      }
+
+      .animal-emoji {
+        font-size: 8rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      .rotating {
+        animation: gentle-rotate 4s ease-in-out infinite;
+      }
+
+      @keyframes gentle-rotate {
+        0%, 100% { transform: rotate(-5deg) scale(1); }
+        50% { transform: rotate(5deg) scale(1.1); }
+      }
+
+      .animal-name {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+      }
+
+      .threats-preview {
+        color: white;
+      }
+
+      .threats-preview h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .threats-preview ul {
+        list-style: none;
+      }
+
+      .threat-item {
+        padding: 0.8rem 0;
+        border-left: 3px solid rgba(255, 255, 255, 0.3);
+        padding-left: 1rem;
+        margin-bottom: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
+        animation: slide-in 0.5s ease-out;
+      }
+
+      @keyframes slide-in {
+        0% {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .indicator.active {
+        background: white;
+        transform: scale(1.2);
+      }
+
+      .indicator:hover {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 4rem 2rem;
+      }
+
+      .animal-section {
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .animal-header {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+      }
+
+      .animal-icon {
+        font-size: 4rem;
+      }
+
+      .pulsing {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+
+      .animal-info h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .status-tag {
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .threats-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .threats-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .threat-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        border-radius: 15px;
+        border-left: 4px solid #333;
+        transform: translateX(-20px);
+        animation: card-slide-in 0.6s ease-out forwards;
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes card-slide-in {
+        0% {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .threat-number {
+        background: #333;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .threat-text {
+        line-height: 1.6;
+        color: #555;
+      }
+
+      /* Call to Action */
+      .cta-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 4rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+      }
+
+      .cta-title {
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .cta-text {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cta-button {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .cta-button.primary {
+        background: white;
+        color: #667eea;
+      }
+
+      .cta-button.secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .swimming-fish {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 100px;
+        pointer-events: none;
+      }
+
+      .fish {
+        position: absolute;
+        font-size: 2rem;
+        animation: swim 8s linear infinite;
+      }
+
+      .fish:nth-child(1) {
+        top: 20%;
+        animation-delay: 0s;
+      }
+
+      .fish:nth-child(2) {
+        top: 60%;
+        animation-delay: -3s;
+      }
+
+      .fish:nth-child(3) {
+        top: 40%;
+        animation-delay: -6s;
+      }
+
+      @keyframes swim {
+        0% {
+          left: -100px;
+          transform: scaleX(1);
+        }
+        48% {
+          transform: scaleX(1);
+        }
+        50% {
+          left: 50%;
+          transform: scaleX(-1);
+        }
+        98% {
+          transform: scaleX(-1);
+        }
+        100% {
+          left: calc(100% + 100px);
+          transform: scaleX(1);
+        }
+      }
+
+      /* Footer */
+      .footer {
+        background: #1a1a2e;
+        color: white;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .footer-content p {
+        margin-bottom: 1rem;
+      }
+
+      .ocean-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .ocean-icons span {
+        animation: bob 2s ease-in-out infinite;
+      }
+
+      .ocean-icons span:nth-child(2) { animation-delay: 0.2s; }
+      .ocean-icons span:nth-child(3) { animation-delay: 0.4s; }
+      .ocean-icons span:nth-child(4) { animation-delay: 0.6s; }
+      .ocean-icons span:nth-child(5) { animation-delay: 0.8s; }
+
+      @keyframes bob {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+        
+        .animal-showcase {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding: 2rem;
+        }
+        
+        .animal-emoji {
+          font-size: 5rem;
+        }
+        
+        .animal-name {
+          font-size: 2rem;
+        }
+        
+        .animal-header {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+        }
+        
+        .threats-list {
+          grid-template-columns: 1fr;
+        }
+        
+        .cta-title {
+          font-size: 2rem;
+        }
+        
+        .action-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .cta-button {
+          width: 200px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 2rem;
+        }
+        
+        .animal-section {
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+        }
+        
+        .threats-title {
+          font-size: 1.5rem;
+        }
+        
+        .animal-info h2 {
+          font-size: 1.8rem;
+        }
+      }
+    
