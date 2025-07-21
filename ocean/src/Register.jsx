@@ -1,40 +1,39 @@
-import { useNavigate } from 'react-router';
-import './Register.css'
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
-function Register({switchToLogin}){
+function Register() {
     const navigate = useNavigate();
-    return(
-        <div className="register-container">
-        {/* register box   */}
-        <div className="register-box">
-            <h2>SIGN UP</h2>
-            <br/>
-            <label>
-                <span>Username: </span>
-                <input type="text" id="username" name="username" pattern="[A-Za-z0-9]"/>
-            </label>
-            <br/>
-            <label>
-                <span>Email: </span>
-                <input type="email" id="email" name="email"/>
-            </label>
-            <br/>
-            <label>
-                <span>Phone No: </span>
-                <input type="tel" id="telephone" name="telephone"/>
-            </label>
-            <br/>
-            <label>
-                <span>Password: </span>
-                <input type="password" id="password" name="password"/> 
-            </label>
-            <br/>
-            <div className="sign-box">
-            <button className="submit" type="submit">Sign Up</button>
+
+    return (
+        <div className="auth-wrapper">
+            <div className="auth-box">
+                <h2>Sign Up</h2>
+                <label>
+                    Username:
+                    <input type="text" name="username" />
+                </label>
+                <label>
+                    Email:
+                    <input type="email" name="email" />
+                </label>
+                <label>
+                    Phone No:
+                    <input type="tel" name="telephone" />
+                </label>
+                <label>
+                    Password:
+                    <input type="password" name="password" />
+                </label>
+                <button className="auth-btn">Sign Up</button>
+                <p>
+                    Already have an account?{' '}
+                    <button className="switch-btn" onClick={() => navigate('/login')}>
+                        Login
+                    </button>
+                </p>
             </div>
-            <p>Already have an account? <button onClick={()=>navigate('/login')} className="switch" type="button">Login</button></p>
         </div>
-        </div>
-    )
+    );
 }
+
 export default Register;
