@@ -1,161 +1,319 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { createRoot } from 'react-dom/client';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Sky, Stars, Box } from '@react-three/drei';
-import { create } from 'zustand';
-import './Game.css'; // Assuming you have some styles for the game
-//
-// Store: manages fish, obstacles, game state
-//
-const useStore = create((set) => ({
-  fishPos: [0, 0, 0],
-  obstacles: [],
-  gameOver: false,
-  gravity: -4,
-  jumpStrength: 2.5,
-  restart: () =>
-    set({
-      fishPos: [0, 0, 0],
-      obstacles: [],
-      gameOver: false,
-    }),
-  updateFish: (pos) => set({ fishPos: pos }),
-  addObstacle: (obs) => set((state) => ({ obstacles: [...state.obstacles, obs] })),
-  removeObstacle: (id) =>
-    set((state) => ({ obstacles: state.obstacles.filter((o) => o.id !== id) })),
-  endGame: () => set({ gameOver: true }),
-}));
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import './game.css';
 
-//
-// Main Game Component
-//
-function GameScene() {
-  const fishRef = useRef();
-  const {
-    fishPos,
-    obstacles,
-    gameOver,
-    gravity,
-    jumpStrength,
-    updateFish,
-    addObstacle,
-    removeObstacle,
-    endGame,
-  } = useStore();
+const Game = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [fishPosition, setFishPosition] = useState(250);
+  const [fishRotation, setFishRotation] = useState(0);
+  const [isFlying, setIsFlying] = useState(false);
+  const [flyPowerupActive, setFlyPowerupActive] = useState(false);
+  const [flyPowerupVisible, setFlyPowerupVisible] = useState(false);
+  const [flyPowerupPosition, setFlyPowerupPosition] = useState({ x: 0, y: 0 });
+  const [obstacles, setObstacles] = useState([]);
+  
+  const gameAreaRef = useRef(null);
+  const gravity = useRef(0.5);
+  const jumpForce = useRef(-10);
+  const gameSpeed = useRef(5);
+  const gameLoopRef = useRef(null);
+  const obstacleTimerRef = useRef(null);
+  const powerupTimerRef = useRef(null);
+  const fishVelocity = useRef(0);
 
-  // Gravity & movement
-  useFrame((_, delta) => {
-    if (gameOver) return;
-    let [x, y, z] = fishPos;
-    y += gravity * delta;
-    updateFish([x, y, z]);
+  // Generate random obstacles
+  const generateObstacle = useCallback(() => {
+    if (!gameStarted || gameOver) return;
 
-    if (fishRef.current) {
-      fishRef.current.position.set(x, y, z);
-      fishRef.current.rotation.z = -y / 5;
-    }
-    if (y < -5 || y > 5) endGame();
-  });
+    const isUpperObstacle = Math.random() > 0.5;
+    const obstacleTypes = isUpperObstacle 
+      ? ['diver', 'hook', 'plastic'] 
+      : ['rock', 'shark'];
+    const type = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
+    
+    const gap = 150; // Gap for fish to pass through
+    const obstacleHeight = Math.floor(Math.random() * 200) + 100;
+    
+    const newObstacle = {
+      id: Date.now(),
+      x: gameAreaRef.current.offsetWidth,
+      type,
+      isUpperObstacle,
+      height: obstacleHeight,
+      passed: false
+    };
+    
+    setObstacles(prev => [...prev, newObstacle]);
+  }, [gameStarted, gameOver]);
 
-  // Spawn obstacles
-  useEffect(() => {
-    let idCounter = 0;
-    const interval = setInterval(() => {
-      const id = idCounter++;
-      const gapY = Math.random() * 6 - 3;
-      addObstacle({ id, x: 12, gapY });
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [addObstacle]);
-
-  // Move obstacles & detect collisions
-  useFrame((_, delta) => {
-    if (gameOver) return;
-    obstacles.forEach((obs) => {
-      obs.x -= delta * 4;
-      if (obs.x < -12) removeObstacle(obs.id);
-
-      // 2D collision on y-axis + x proximity
-      const [fx, fy] = fishPos;
-      if (
-        fx > obs.x - 0.5 && fx < obs.x + 0.5 &&
-        (fy < obs.gapY - 1.2 || fy > obs.gapY + 1.2)
-      ) {
-        endGame();
-      }
+  // Generate powerup
+  const generatePowerup = useCallback(() => {
+    if (!gameStarted || gameOver || flyPowerupVisible) return;
+    
+    setFlyPowerupPosition({
+      x: gameAreaRef.current.offsetWidth + 300,
+      y: Math.floor(Math.random() * (gameAreaRef.current.offsetHeight - 100)) + 50
     });
-  });
+    setFlyPowerupVisible(true);
+  }, [gameStarted, gameOver, flyPowerupVisible]);
 
-  // Controls
-  useEffect(() => {
-    function onKeyDown(e) {
-      if (e.code === 'Space' && !gameOver) {
-        const [x, y, z] = fishPos;
-        updateFish([x, y + jumpStrength, z]);
-      }
+  // Handle jump/flap
+  const handleJump = useCallback(() => {
+    if (gameOver) return;
+    
+    if (!gameStarted) {
+      setGameStarted(true);
+      setGameOver(false);
+      setScore(0);
+      setObstacles([]);
+      setFishPosition(250);
+      fishVelocity.current = 0;
     }
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [fishPos, updateFish, jumpStrength, gameOver]);
+    
+    fishVelocity.current = jumpForce.current;
+    setFishRotation(-30);
+  }, [gameOver, gameStarted]);
+
+  // Activate flying powerup
+  const activateFlying = useCallback(() => {
+    setIsFlying(true);
+    setFlyPowerupActive(true);
+    setFlyPowerupVisible(false);
+    fishVelocity.current = -5;
+    
+    setTimeout(() => {
+      setIsFlying(false);
+      setFlyPowerupActive(false);
+    }, 5000);
+  }, []);
+
+  // Main game loop
+  useEffect(() => {
+    if (!gameStarted) return;
+
+    const updateGameState = () => {
+      // Update fish position
+      if (!isFlying) {
+        fishVelocity.current += gravity.current;
+        setFishPosition(prev => {
+          const newPosition = prev + fishVelocity.current;
+          return Math.max(0, Math.min(newPosition, gameAreaRef.current.offsetHeight - 40));
+        });
+      } else {
+        // Flying mode - move upward gently
+        setFishPosition(prev => Math.max(0, prev - 3));
+      }
+
+      // Rotate fish based on velocity
+      setFishRotation(Math.min(90, Math.max(-30, fishVelocity.current * 3)));
+
+      // Move obstacles
+      setObstacles(prev => {
+        return prev.map(obstacle => {
+          // Check for collision
+          if (!flyPowerupActive && !gameOver) {
+            const fishRight = 100;
+            const fishBottom = fishPosition + 40;
+            const fishTop = fishPosition;
+            
+            const obstacleLeft = obstacle.x;
+            const obstacleRight = obstacle.x + 60;
+            const obstacleTop = obstacle.isUpperObstacle ? 0 : gameAreaRef.current.offsetHeight - obstacle.height;
+            const obstacleBottom = obstacle.isUpperObstacle ? obstacle.height : gameAreaRef.current.offsetHeight;
+            
+            if (
+              fishRight > obstacleLeft && 
+              100 < obstacleRight &&
+              fishBottom > obstacleTop && 
+              fishTop < obstacleBottom
+            ) {
+              setGameOver(true);
+            }
+          }
+          
+          // Check if passed
+          if (!obstacle.passed && obstacle.x + 60 < 100) {
+            setScore(prev => prev + 1);
+            return { ...obstacle, x: obstacle.x - gameSpeed.current, passed: true };
+          }
+          
+          return { ...obstacle, x: obstacle.x - gameSpeed.current };
+        }).filter(obstacle => obstacle.x > -60);
+      });
+
+      // Move powerup
+      if (flyPowerupVisible) {
+        setFlyPowerupPosition(prev => ({ ...prev, x: prev.x - gameSpeed.current }));
+        
+        // Check powerup collision
+        const powerupLeft = flyPowerupPosition.x;
+        const powerupRight = flyPowerupPosition.x + 30;
+        const powerupTop = flyPowerupPosition.y;
+        const powerupBottom = flyPowerupPosition.y + 30;
+        
+        const fishRight = 100;
+        const fishBottom = fishPosition + 40;
+        const fishTop = fishPosition;
+        
+        if (
+          fishRight > powerupLeft && 
+          100 < powerupRight &&
+          fishBottom > powerupTop && 
+          fishTop < powerupBottom
+        ) {
+          activateFlying();
+        }
+        
+        // Remove if off screen
+        if (flyPowerupPosition.x < -30) {
+          setFlyPowerupVisible(false);
+        }
+      }
+
+      // Game over if fish hits top/bottom (unless flying)
+      if (!isFlying && (fishPosition <= 0 || fishPosition >= gameAreaRef.current.offsetHeight - 40)) {
+        setGameOver(true);
+      }
+
+      // Increase difficulty
+      if (score > 0 && score % 5 === 0) {
+        gameSpeed.current = 5 + Math.floor(score / 5);
+      }
+    };
+
+    gameLoopRef.current = requestAnimationFrame(function gameLoop() {
+      updateGameState();
+      gameLoopRef.current = requestAnimationFrame(gameLoop);
+    });
+
+    return () => {
+      cancelAnimationFrame(gameLoopRef.current);
+    };
+  }, [
+    gameStarted, 
+    gameOver, 
+    fishPosition, 
+    score, 
+    isFlying, 
+    flyPowerupActive, 
+    flyPowerupVisible, 
+    flyPowerupPosition, 
+    activateFlying
+  ]);
+
+  // Obstacle generation timer
+  useEffect(() => {
+    if (gameStarted && !gameOver) {
+      obstacleTimerRef.current = setInterval(generateObstacle, 1500);
+      return () => clearInterval(obstacleTimerRef.current);
+    }
+  }, [gameStarted, gameOver, generateObstacle]);
+
+  // Powerup generation timer
+  useEffect(() => {
+    if (gameStarted && !gameOver) {
+      powerupTimerRef.current = setInterval(generatePowerup, 10000);
+      return () => clearInterval(powerupTimerRef.current);
+    }
+  }, [gameStarted, gameOver, generatePowerup]);
+
+  // Update high score
+  useEffect(() => {
+    if (gameOver && score > highScore) {
+      setHighScore(score);
+    }
+  }, [gameOver, score, highScore]);
+
+  // Event listeners
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === 'Space' || e.key === ' ' || e.key === 'ArrowUp') {
+        handleJump();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleJump]);
 
   return (
-    <>
-      <Sky sunPosition={[100, 20, 100]} />
-      <Stars radius={100} depth={50} count={5000} factor={4} />
-
-      {/* Sea plants */}
-      <mesh position={[-3, -4, -5]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[2, 1]} />
-        <meshStandardMaterial color="#228B22" side={2} />
-      </mesh>
-      <mesh position={[3, -4, -5]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[1.5, 0.8]} />
-        <meshStandardMaterial color="#32CD32" side={2} />
-      </mesh>
-
-      {/* Fish */}
-      <mesh ref={fishRef} position={fishPos}>
-        <sphereGeometry args={[0.5, 32, 32]} />
-        <meshStandardMaterial color="#FF6347" />
-      </mesh>
-
-      {/* Obstacles */}
-      {obstacles.map((obs) => (
-        <group key={obs.id}>
-          {/* Top: boat */}
-          <Box args={[2, 1, 1]} position={[obs.x, obs.gapY + 3, 0]}>
-            <meshStandardMaterial color="saddlebrown" />
-          </Box>
-          {/* Bottom: rock */}
-          <Box args={[2, 1, 1]} position={[obs.x, obs.gapY - 3, 0]}>
-            <meshStandardMaterial color="gray" />
-          </Box>
-        </group>
-      ))}
-    </>
+    <div className="game-container">
+      <h1>Flying Fish Adventure</h1>
+      <div className="score-board">
+        <div>Score: {score}</div>
+        <div>High Score: {highScore}</div>
+        {flyPowerupActive && <div className="powerup-timer">FLYING: {Math.ceil(5000 - (performance.now() % 5000)) / 1000}s</div>}
+      </div>
+      
+      <div 
+        ref={gameAreaRef} 
+        className="game-area" 
+        onClick={handleJump}
+      >
+        {/* Ocean surface */}
+        <div className="ocean-surface"></div>
+        
+        {/* Ocean floor */}
+        <div className="ocean-floor"></div>
+        
+        {/* Fish */}
+        <div 
+          className={`fish ${isFlying ? 'flying' : ''}`} 
+          style={{ 
+            top: `${fishPosition}px`, 
+            transform: `rotate(${fishRotation}deg)` 
+          }}
+        ></div>
+        
+        {/* Obstacles */}
+        {obstacles.map(obstacle => (
+          <div 
+            key={obstacle.id}
+            className={`obstacle ${obstacle.type} ${obstacle.isUpperObstacle ? 'upper' : 'lower'}`}
+            style={{ 
+              left: `${obstacle.x}px`,
+              height: `${obstacle.height}px`,
+              [obstacle.isUpperObstacle ? 'top' : 'bottom']: 0
+            }}
+          ></div>
+        ))}
+        
+        {/* Flying powerup */}
+        {flyPowerupVisible && (
+          <div 
+            className="powerup fly-powerup"
+            style={{ 
+              left: `${flyPowerupPosition.x}px`,
+              top: `${flyPowerupPosition.y}px`
+            }}
+          ></div>
+        )}
+        
+        {/* Game messages */}
+        {!gameStarted && (
+          <div className="game-message">
+            <h2>Click or Press Space to Start</h2>
+            <p>Avoid obstacles and collect the powerup to fly!</p>
+          </div>
+        )}
+        
+        {gameOver && (
+          <div className="game-message">
+            <h2>Game Over</h2>
+            <p>Score: {score}</p>
+            <button onClick={handleJump}>Play Again</button>
+          </div>
+        )}
+      </div>
+      
+      <div className="instructions">
+        <p>Controls: Click, Space, or Arrow Up to make the fish jump</p>
+        <p>Collect the powerup to fly for 5 seconds!</p>
+      </div>
+    </div>
   );
-}
+};
 
-function Game() {
-  const { gameOver, restart } = useStore();
-  return (
-    <>
-      {gameOver && (
-        <div className="overlay">
-          <h1>Game Over</h1>
-          <button onClick={restart}>Restart</button>
-        </div>
-      )}
-      <Canvas shadows camera={{ position: [0, 0, 10], fov: 60 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 10, 5]} intensity={1} />
-        <GameScene />
-      </Canvas>
-    </>
-  );
-}
-
-// Render
-const container = document.getElementById('root');
-createRoot(container).render(<Game />);
 export default Game;
