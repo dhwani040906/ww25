@@ -1,5 +1,3 @@
-import './Quiz.css'
-
 function Quiz(){
     return(
         <div>

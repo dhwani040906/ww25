@@ -1,5 +1,31 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './game.css';
+import './Game.css';
+import React, { useState, useEffect, useRef } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Sky, Stars, Box } from '@react-three/drei';
+import { create } from 'zustand';
+//
+// Store: manages fish, obstacles, game state
+//
+const useStore = create((set) => ({
+  fishPos: [0, 0, 0],
+  obstacles: [],
+  gameOver: false,
+  gravity: -4,
+  jumpStrength: 2.5,
+  restart: () =>
+    set({
+      fishPos: [0, 0, 0],
+      obstacles: [],
+      gameOver: false,
+    }),
+  updateFish: (pos) => set({ fishPos: pos }),
+  addObstacle: (obs) => set((state) => ({ obstacles: [...state.obstacles, obs] })),
+  removeObstacle: (id) =>
+    set((state) => ({ obstacles: state.obstacles.filter((o) => o.id !== id) })),
+  endGame: () => set({ gameOver: true }),
+}));
 
 const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);

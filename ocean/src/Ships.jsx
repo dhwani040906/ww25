@@ -1,4 +1,3 @@
-import './Ships.css'
 
 function Ships(){
     return(

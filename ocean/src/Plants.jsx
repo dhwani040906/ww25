@@ -1,5 +1,3 @@
-import './Plants.css'
-
 function Plants(){
     return(
         <div>

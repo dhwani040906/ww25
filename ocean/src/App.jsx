@@ -8,7 +8,7 @@ import Plants from './Plants'
 import Shells from './Shells'
 // import About from './About'
 // import Community from './Community'
-// import Dive from './Dive'
+//import Dive from './Dive'
 import Game from './Game'
 // import Ocean from './Ocean'
 import Quiz from './Quiz'
@@ -35,7 +35,7 @@ function App(){
                 <Route path="/quiz" element= {<Quiz/>} /> 
                 <Route path="/ships" element= {<Ships/>} /> 
                 <Route path="/game" element= {<Game/>} /> 
-                {/* <Route path="/dive" element= {<Dive/>} />   */}
+                {/* {<Route path="/dive" element= {<Dive/>} />} */}
                 {/* <Route path="/solutions" element= {<Solutions/>} /> 
                 <Route path="/community" element= {<Community/>} />  */}
                 {/* <Route path="/about" element= {<About/>} />  */}
