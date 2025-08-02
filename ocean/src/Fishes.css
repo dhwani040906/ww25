@@ -79,7 +79,6 @@ body, html {
   overflow-y: scroll;
   padding-right: 17px;
   box-sizing: content-box;
-
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -89,7 +88,6 @@ body, html {
   width: 0;
   height: 0;
 }
-
 
 .Fishestaskbar h2 {
   text-align: center;
