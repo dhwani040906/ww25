@@ -14,7 +14,7 @@ import Game from './Game'
 import Quiz from './Quiz'
 import Ships from './Ships'
 // import Solutions from './Solutions'
-// import Threats from './Threats'
+import Threats from './Threats'
 import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -27,7 +27,7 @@ function App(){
                 <Route path="/login" element = {<Login/>} />
                 <Route path="/register" element= {<Register/>} /> 
                 <Route path="/explore" element= {<Explore/>} /> 
-                {/* <Route path="/threats" element= {<Threats/>} />  */}
+                <Route path="/threats" element= {<Threats/>} /> 
                 <Route path="/gallery" element= {<Gallery/>} /> 
                 <Route path="/fishes" element= {<Fishes/>} /> 
                 <Route path="/shells" element= {<Shells/>} /> 

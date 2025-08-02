@@ -39,7 +39,6 @@ export default function Explore() {
 
   const getPosition = (index) => {
     const relative = (index - activeIndex + cards.length) % cards.length;
-
     switch (relative) {
       case 0: return 'center';
       case 1: return 'right';
@@ -49,20 +48,20 @@ export default function Explore() {
   };
 
   return (
-    <div className="explore-page">
+    <div className="deepverse-explore">
       <button className="explore-home-button" onClick={() => navigate('/')}>Home</button>
 
-      {/* Title, Info & Go Button */}
       <div className="explore-top-info">
         <h1>{cards[activeIndex].title}</h1>
         <p className="explore-top-description">{cards[activeIndex].description}</p>
-        <button onClick={() => navigate(`/${cards[activeIndex].title.toLowerCase()}`)}
-          className="explore-go-btn">
+        <button
+          onClick={() => navigate(`/${cards[activeIndex].title.toLowerCase()}`)}
+          className="explore-go-btn"
+        >
           Go to {cards[activeIndex].title}
         </button>
       </div>
 
-      {/* Card Carousel */}
       <div className="explore-carousel">
         <button className="explore-arrow explore-left" onClick={rotateLeft}>&lt;</button>
 

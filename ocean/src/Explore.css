@@ -1,52 +1,56 @@
-.explore-page {
+.deepverse-explore {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to bottom, #001F3F, #000814);
   color: white;
   font-family: 'Segoe UI', sans-serif;
-  position: relative;
+  padding: 40px 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Home button */
-.explore-home-button {
+/* Home Button */
+.deepverse-explore .explore-home-button {
   position: absolute;
   top: 20px;
-  left: 30px;
-  padding: 10px 20px;
+  left: 20px;
+  padding: 8px 18px;
   background: transparent;
   border: 2px solid #00bfff;
   color: #00bfff;
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+  z-index: 100;
 }
 
-/* Top heading, description & go button */
-.explore-top-info {
+/* Info Section */
+.deepverse-explore .explore-top-info {
   text-align: center;
-  margin-bottom: 60px;
-  margin-top: -300px;
+  margin-top: 60px;
+  margin-bottom: 80px;
+  padding: 0 15px;
 }
 
-.explore-top-info h1 {
-  font-size: 6rem;
+.deepverse-explore .explore-top-info h1 {
+  font-size: 3rem;
   color: #00bfff;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.explore-top-description {
-  font-size: 1.1rem;
+.deepverse-explore .explore-top-description {
+  font-size: 1rem;
   max-width: 600px;
   margin: 0 auto 20px;
   color: #ccc;
 }
 
-.explore-go-btn {
-  padding: 15px 27px;
+.deepverse-explore .explore-go-btn {
+  padding: 12px 24px;
   background-color: #00bfff;
   border: none;
   border-radius: 30px;
@@ -54,29 +58,27 @@
   color: #001F3F;
   cursor: pointer;
   transition: 0.3s ease;
-  position: relative;
-  top: 150px;
-  z-index: 10;
 }
 
-.explore-go-btn:hover {
+.deepverse-explore .explore-go-btn:hover {
   background-color: #0099cc;
 }
 
-/* Carousel Layout */
-.explore-carousel {
+/* Carousel Section */
+.deepverse-explore .explore-carousel {
   position: relative;
-  width: 800px;
-  height: 250px;
+  width: 100%;
+  max-width: 900px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Card Style */
-.explore-card {
-  width: 180px;
-  height: 180px;
+/* Cards */
+.deepverse-explore .explore-card {
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: #003366;
   color: white;
@@ -90,42 +92,42 @@
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
 }
 
-.explore-card h3 {
-  font-size: 1.2rem;
+.deepverse-explore .explore-card h3 {
+  font-size: 1rem;
+  text-align: center;
+  padding: 10px;
 }
 
-/* Focused Card */
-.explore-card.center {
-  transform: translateX(0) translateY(250px) scale(1.8);
+.deepverse-explore .explore-card.center {
+  transform: translateX(0) scale(1.6);
   z-index: 3;
   opacity: 1;
   pointer-events: auto;
   background-color: #0077cc;
 }
 
-/* Side Cards */
-.explore-card.left {
-  transform: translateX(-600px) scale(1.5);
+.deepverse-explore .explore-card.left {
+  transform: translateX(-220px) scale(1.2);
   z-index: 2;
   opacity: 0.8;
   pointer-events: auto;
 }
 
-.explore-card.right {
-  transform: translateX(600px) scale(1.5);
+.deepverse-explore .explore-card.right {
+  transform: translateX(220px) scale(1.2);
   z-index: 2;
   opacity: 0.8;
   pointer-events: auto;
 }
 
-.explore-card.hidden {
+.deepverse-explore .explore-card.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
 /* Arrows */
-.explore-arrow {
-  font-size: 2.5rem;
+.deepverse-explore .explore-arrow {
+  font-size: 2.2rem;
   background: none;
   border: none;
   color: #00bfff;
@@ -134,22 +136,75 @@
   transition: transform 0.3s ease;
 }
 
-.explore-arrow:hover {
+.deepverse-explore .explore-arrow:hover {
   transform: scale(1.2);
 }
 
-.explore-arrow:focus {
-  outline: none;
+.deepverse-explore .explore-left {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.explore-left {
+.deepverse-explore .explore-right {
   position: absolute;
-  left: -200px;
-  top: 150%;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.explore-right {
-  position: absolute;
-  right: -200px;
-  top: 150%;
+/* Responsive */
+@media (max-width: 768px) {
+  .deepverse-explore .explore-top-info h1 {
+    font-size: 2.3rem;
+  }
+
+  .deepverse-explore .explore-card.center {
+    transform: translateX(0) scale(1.4);
+  }
+
+  .deepverse-explore .explore-card.left {
+    transform: translateX(-160px) scale(1.1);
+  }
+
+  .deepverse-explore .explore-card.right {
+    transform: translateX(160px) scale(1.1);
+  }
+
+  .deepverse-explore .explore-left,
+  .deepverse-explore .explore-right {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .deepverse-explore .explore-card {
+    width: 100px;
+    height: 100px;
+  }
+
+  .deepverse-explore .explore-card h3 {
+    font-size: 0.85rem;
+  }
+
+  .deepverse-explore .explore-card.center {
+    transform: translateX(0) scale(1.3);
+  }
+
+  .deepverse-explore .explore-card.left {
+    transform: translateX(-120px) scale(1);
+  }
+
+  .deepverse-explore .explore-card.right {
+    transform: translateX(120px) scale(1);
+  }
+
+  .deepverse-explore .explore-left {
+    left: 2%;
+  }
+
+  .deepverse-explore .explore-right {
+    right: 2%;
+  }
 }
