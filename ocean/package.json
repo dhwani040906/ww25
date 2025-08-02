@@ -10,35 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@react-three/drei": "^10.5.1",
-    "@react-three/fiber": "^9.2.0",
+    "@react-three/drei": "^10.6.1",
+    "@react-three/fiber": "^9.3.0",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "mongoose": "^8.17.0",
     "nodemon": "^3.1.10",
-=======
-    "@react-three/drei": "^10.6.1",
-    "@react-three/fiber": "^9.3.0",
->>>>>>> 8d0eccde8d890886101f2125281b3a4bbed1f51b
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router": "^7.7.0",
     "react-router-dom": "^7.7.0",
-<<<<<<< HEAD
-    "style-components": "^0.1.0",
-=======
     "styled-components": "^6.1.19",
->>>>>>> 8d0eccde8d890886101f2125281b3a4bbed1f51b
     "swiper": "^11.2.10",
     "three": "^0.178.0",
-<<<<<<< HEAD
-    "zustand": "^5.0.7"
-=======
+    "zustand": "^5.0.7",
     "vanta": "^0.5.24"
->>>>>>> dea7c4699311a1c6e30c488e8a0cf3c8b4fafa88
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

@@ -1,5 +1,3 @@
-import './Shells.css'
-
 function Shells(){
     return(
         <div>

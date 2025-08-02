@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sky, Stars, Box } from '@react-three/drei';
 import { create } from 'zustand';
-import './Game.css'; // Assuming you have some styles for the game
 //
 // Store: manages fish, obstacles, game state
 //
