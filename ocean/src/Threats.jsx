@@ -1,239 +1,152 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
-import React, { useState, useEffect } from 'react';
-import './Threats.css';
+const threats = [
+  {
+    title: 'Plastic Pollution',
+    description: 'Over 8 million tons of plastic enter the ocean each year, harming marine life and ecosystems. Plastics are mistaken for food by marine animals, which can lead to starvation and death. Microplastics also enter the food chain, affecting humans too.',
+    image: '/images/plastic.jpg',
+  },
+  {
+    title: 'Coral Bleaching',
+    description: 'Rising sea temperatures cause coral reefs to expel algae, turning them white and leading to biodiversity loss. Coral bleaching is a signal of climate change and severely impacts marine species that depend on coral ecosystems.',
+    image: '/images/coral.jpg',
+  },
+  {
+    title: 'Overfishing',
+    description: 'Excessive fishing depletes fish populations, damages habitats, and disrupts ocean food chains. This results in ecological imbalance and threatens the survival of dependent species and human communities relying on fish as a food source.',
+    image: '/images/overfishing.jpg',
+  },
+  {
+    title: 'Oil Spills',
+    description: 'Oil spills create long-lasting damage, coating marine life and habitats in toxic substances. Recovery from oil spills can take decades, and cleanup efforts are often insufficient to restore the original ecosystem.',
+    image: '/images/oilspill.jpg',
+  },
+  {
+    title: 'Ocean Acidification',
+    description: 'CO₂ absorbed by oceans lowers pH levels, weakening the shells of marine creatures like corals and mollusks. This disrupts marine ecosystems and food chains, especially in polar and tropical regions.',
+    image: '/images/acidification.jpg',
+  },
+  {
+    title: 'Noise Pollution',
+    description: 'Ship traffic and drilling produce underwater noise that confuses marine mammals and affects navigation, mating, and hunting. Species like whales and dolphins are particularly affected due to their reliance on echolocation.',
+    image: '/images/noise.jpg',
+  },
+];
 
-const AquaticThreatsWebsite = () => {
-  const [currentAnimal, setCurrentAnimal] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
-
-  const animals = [
-    {
-      id: 1,
-      name: "Sea Turtle",
-      emoji: "🐢",
-      threats: [
-        "Plastic pollution - mistaking plastic bags for jellyfish",
-        "Coastal development destroying nesting beaches",
-        "Climate change affecting sand temperature and sex ratios",
-        "Fishing nets causing accidental capture"
-      ],
-      color: "#2E8B57",
-      status: "Endangered"
-    },
-    {
-      id: 2,
-      name: "Dolphin",
-      emoji: "🐬",
-      threats: [
-        "Chemical runoff, heavy metals, and plastic waste weaken dolphins’ immune systems and can cause reproductive failure and cancerous tumors",
-        "- Climate change affects food availability and migration",
-        "Pollution from coastal runoff",
-        "Destructive fishing practices"
-      ],
-      color: "#7856ceff",
-      status: "Critically Threatened"
-    },
-    {
-      id: 3,
-      name: "Whale",
-      emoji: "🐋",
-      threats: [
-        "Ship strikes in busy shipping lanes",
-        "Noise pollution disrupting communication",
-        "Plastic ingestion and entanglement",
-        "Climate change affecting food sources"
-      ],
-      color: "#3b5468ff",
-      status: "Vulnerable"
-    },
-    {
-      id: 4,
-      name: "Polar Bear",
-      emoji: "🐻‍❄️",
-      threats: [
-        "Arctic ice loss due to global warming",
-        "Reduced hunting grounds for seals",
-        "Pollution affecting food chain",
-        "Human encroachment on habitat"
-      ],
-      color: "#9ed5eaff",
-      status: "Vulnerable"
-    },
-    
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentAnimal((prev) => (prev + 1) % animals.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        setIsVisible(prev => ({
-          ...prev,
-          [entry.target.id]: entry.isIntersecting
-        }));
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1
-    });
-
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Critically Threatened': return '#f33333ff';
-      case 'Endangered': return '#FF8800';
-      case 'Vulnerable': return '#FFAA00';
-      case 'Threatened': return '#FFD700';
-      default: return '#888';
-    }
-  };
+export default function ThreatsPage() {
+  const navigate = useNavigate();
 
   return (
-    <div className="website-container">
-      <header className="hero-section">
-        <div className="ocean-waves">
-          <div className="wave wave1"></div>
-          <div className="wave wave2"></div>
-          <div className="wave wave3"></div>
-        </div>
-        <div className="hero-content">
-          <h1 className="hero-title">Threats to Our Ocean Friends</h1>
-          <p className="hero-subtitle">Understanding the challenges facing aquatic life</p>
-          <div className="floating-bubbles">
-            <div className="bubble bubble1"></div>
-            <div className="bubble bubble2"></div>
-            <div className="bubble bubble3"></div>
-            <div className="bubble bubble4"></div>
-          </div>
-        </div>
-      </header>
+    <PageContainer>
+      <TopBar>
+        <HomeButton onClick={() => navigate('/')}>← Home</HomeButton>
+        <Title>Ocean Threats</Title>
+      </TopBar>
 
-    
-      <section className="carousel-section">
-        <div className="carousel-container">
-          <div 
-            className="animal-showcase"
-            style={{ backgroundColor: animals[currentAnimal].color + '20' }}
-          >
-            <div className="animal-display">
-              <div className="animal-emoji rotating">{animals[currentAnimal].emoji}</div>
-              <h2 className="animal-name">{animals[currentAnimal].name}</h2>
-              <div 
-                className="status-badge"
-                style={{ backgroundColor: getStatusColor(animals[currentAnimal].status) }}
-              >
-                {animals[currentAnimal].status}
-              </div>
-            </div>
-            <div className="threats-preview">
-              <h3>Major Threats:</h3>
-              <ul>
-                {animals[currentAnimal].threats.slice(0, 2).map((threat, index) => (
-                  <li key={index} className="threat-item">{threat}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="carousel-indicators">
-          {animals.map((_, index) => (
-            <button
-              key={index}
-              className={`indicator ${index === currentAnimal ? 'active' : ''}`}
-              onClick={() => setCurrentAnimal(index)}
-            />
-          ))}
-        </div>
-      </section>
-
-      
-      <main className="main-content">
-        {animals.map((animal, index) => (
-          <section 
-            key={animal.id} 
-            id={`animal-${index}`}
-            className={`animal-section animate-on-scroll ${isVisible[`animal-${index}`] ? 'visible' : ''}`}
-            style={{ '--accent-color': animal.color }}
-          >
-            <div className="section-content">
-              <div className="animal-header">
-                <div className="animal-icon pulsing">{animal.emoji}</div>
-                <div className="animal-info">
-                  <h2 className="section-title">{animal.name}</h2>
-                  <div 
-                    className="status-tag"
-                    style={{ backgroundColor: getStatusColor(animal.status) }}
-                  >
-                    Status: {animal.status}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="threats-grid">
-                <h3 className="threats-title">Critical Threats:</h3>
-                <div className="threats-list">
-                  {animal.threats.map((threat, threatIndex) => (
-                    <div 
-                      key={threatIndex} 
-                      className="threat-card"
-                      style={{ animationDelay: `${threatIndex * 0.1}s` }}
-                    >
-                      <div className="threat-number">{threatIndex + 1}</div>
-                      <p className="threat-text">{threat}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
+      <ThreatList>
+        {threats.map((threat, index) => (
+          <ThreatCard key={index}>
+            <ThreatImage src={threat.image} alt={threat.title} />
+            <ThreatText>
+              <ThreatTitle>{threat.title}</ThreatTitle>
+              <ThreatDescription>{threat.description}</ThreatDescription>
+            </ThreatText>
+          </ThreatCard>
         ))}
-      </main>
-      <section className="cta-section animate-on-scroll" id="cta">
-        <div className="cta-content">
-          <h2 className="cta-title">Take Action Today</h2>
-          <p className="cta-text">
-            Every action counts in protecting our precious marine life. 
-            Together we can make a difference for future generations.
-          </p>
-          <div className="action-buttons">
-            <button className="cta-button primary">Learn More</button>
-            <button className="cta-button secondary">Donate</button>
-          </div>
-        </div>
-        <div className="swimming-fish">
-          <div className="fish">🐠</div>
-          <div className="fish">🐟</div>
-          <div className="fish">🦈</div>
-        </div>
-      </section>
-
-      
-      <footer className="footer">
-        <div className="footer-content">
-          <p>&copy; 2025 Aquatic Conservation Initiative. Protecting marine life for future generations.</p>
-          <div className="ocean-icons">
-            <span>🌊</span>
-            <span>🐬</span>
-            <span>🐋</span>
-            <span>🐢</span>
-          <span>🌊</span>
-          </div>
-        </div>
-      </footer>
-    </div>
+      </ThreatList>
+    </PageContainer>
   );
-};
+}
 
-export default AquaticThreatsWebsite;
+const PageContainer = styled.div`
+  background: linear-gradient(135deg, #000814, #001f3f);
+  min-height: 100vh;
+  color: white;
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-y: auto;
+`;
+
+const TopBar = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+`;
+
+const HomeButton = styled.button`
+  background: transparent;
+  border: 2px solid #00eaff;
+  color: #00eaff;
+  border-radius: 25px;
+  padding: 6px 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 20px;
+
+  &:hover {
+    background: #00eaff;
+    color: #000814;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: 2.4rem;
+  color: #00bfff;
+  font-family: 'Orbitron', sans-serif;
+`;
+
+const ThreatList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
+const ThreatCard = styled.div`
+  display: flex;
+  flex-direction: row;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.1);
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ThreatImage = styled.img`
+  width: 300px;
+  height: 220px;
+  object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 200px;
+  }
+`;
+
+const ThreatText = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ThreatTitle = styled.h2`
+  font-size: 1.6rem;
+  color: #00eaff;
+`;
+
+const ThreatDescription = styled.p`
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 10px;
+`;

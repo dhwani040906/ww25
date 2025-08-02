@@ -3,13 +3,13 @@ import logo from './assets/deepverse_logo.png';
 
 const pulseGlow = keyframes`
   0% {
-    filter: drop-shadow(0 0 5px #00eaff) drop-shadow(0 0 10px #00eaff);
+    filter: drop-shadow(0 0 5px #222831) drop-shadow(0 0 10px #222831);
   }
   50% {
-    filter: drop-shadow(0 0 12px #00eaff) drop-shadow(0 0 25px #00eaff);
+    filter: drop-shadow(0 0 12px #1f1f1f) drop-shadow(0 0 25px #1f1f1f);
   }
   100% {
-    filter: drop-shadow(0 0 5px #00eaff) drop-shadow(0 0 10px #00eaff);
+    filter: drop-shadow(0 0 5px #222831) drop-shadow(0 0 10px #222831);
   }
 `;
 
